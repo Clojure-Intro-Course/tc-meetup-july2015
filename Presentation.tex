@@ -63,6 +63,9 @@ July 1, 2015\par}
 
 \begin{frame}
 	\frametitle{Why Clojure}
+	\item Wider industry use
+	\item Better on Resume
+	\item plethora of libraries (music, graphical)
 \end{frame}
 
 \begin{frame}
@@ -101,34 +104,127 @@ July 1, 2015\par}
 	\frametitle{Future Work}
 \end{frame}
 
+
+
+
 \section{Quil}
 
 \begin{frame}
-	\frametitle{What Quil}
+	\frametitle{What is Quil?}
+	\begin{itemize}
+  		\item Graphical Library for Clojure
+  		\item It can:
+  		\begin{itemize}
+  	 		\item Draw shapes and images
+  	 		\item Move objects on the screen
+  	 		\item Make games, pictures, ect..
+  		\end{itemize}
+  		\item Quil sits on top of Clojure
+	 \end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{How Quil}
+	\frametitle{How does Quil work?}
+	\begin{itemize}
+  		\item Quil takes draw commands
+  		%This means you tell quil what to draw and thats it
+  	 	\item What you type: (q/rect 500 500 200 200)
+  	 	\item What Quil sees: Draw a rectangle at (500, 500)\par 
+  	 	and make it 200 pixels wide and 200 pixels tall
+	 \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Default Quil isn't enough}
+	\begin{itemize}
+		\item Quil ONLY takes draw commands
+		\item Quil doesn't follow MVC
+		\item Quil code can get confusing and long
+		
+			\begin{verbatim}
+	(q/fill 80 255 80)
+	(q/rect 100 100 50 50)
+	(q/no-fill)
+	(q/no-stroke)
+			\end{verbatim}	
+		\item versus
+		\begin{verbatim}
+	(def lime-rect 
+	  (create-rect 50 50 :lime))
+	(ds lime-rect 100 100)
+			\end{verbatim}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Why Quil is Bad}
+	\frametitle{Six Squares
+	\item PICTURE OF 6 SQUARES}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quil}
+	\item Especially when you draw more things
+	\begin{itemize}
+			\begin{verbatim}
+  (let [x 100
+  		num 6
+  		dist (+ 100 (* (\ num 2) 50))]
+	(q/fill 80 255 80)
+	(q/rect (- dist (* 1 50)) 100 50 50)
+	(q/rect (- dist (* 2 50)) 100 50 50)
+	(q/rect (- dist (* 3 50)) 100 50 50)
+	(q/rect (- dist (* 4 50)) 100 50 50)
+	(q/rect (- dist (* 5 50)) 100 50 50)
+	(q/rect (- dist (* 6 50)) 100 50 50))
+	(q/no-fill)
+	(q/no-stroke)
+			\end{verbatim}	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Our Code}
+	\begin{itemize}
+		\item versus
+		\begin{verbatim}
+	(def lime-rect 
+	  (create-rect 50 50 :lime))
+	  (def lime-rects (beside 
+	  lime-rect lime-rect
+	  lime-rect lime-rect
+	  lime-rect lime-rect))
+	  						  
+	(ds lime-rects 100 100)
+			\end{verbatim}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{What we Want and Why}
+	\frametitle{What we want}
+	\begin{itemize}
+		\item Less paintbrush, more collage
+		\item Create shapes, not just draw them
+		\item Easier student code
+		\item Not distracting from learning basic concepts
+		\item Works with flow of basic concepts
+		\item Gives an idea of how good software should be built by giving a language like that
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Why we Want it}
+	\frametitle{Why we want that}
+	\item Bigger student projects
+	\item Smoother transition into Java
+	\item 
 \end{frame}
 
 \begin{frame}
-	\frametitle{SUPERFUNMODE}
+	\frametitle{Designing SuperFunMode}
 \end{frame}
 
 \begin{frame}
-	\frametitle{SUPERFUNMODETWO}
+	\frametitle{SuperFunMode Cont.}
 \end{frame}
 
 \begin{frame}
