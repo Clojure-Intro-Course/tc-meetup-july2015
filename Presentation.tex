@@ -1,11 +1,7 @@
 \documentclass{beamer}
 \usetheme{Montpellier}
 \usecolortheme{dolphin}
-
-
-%% GIT working check
-
-
+%% Checking if saving file is working more
 %\usepackage{graphicx} %For jpg figure inclusion
 %\usepackage{times} %For typeface
 %\usepackage{epsfig}
@@ -19,7 +15,6 @@
 %\usepackage{parskip}
 %\usepackage{multirow}
 
-%% Elena's favorite green (thanks, Fernando!)
 \definecolor{ForestGreen}{RGB}{34,139,34}
 \definecolor{BlueViolet}{RGB}{138,43,226}
 \definecolor{Coquelicot}{RGB}{255, 56, 0}
@@ -39,19 +34,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{Developing Beginner-Friendly User Interactions for the Clojure Programming Language}
-\date{April 11, 2015}
+\title{Restructuring Clojure for a Racket-style Environment}
+\date{July 1, 2015}
 
 \begin{frame}
-\frametitle{Developing Beginner-Friendly User Interactions for the Clojure Programming Language}
+\frametitle {Restructuring Clojure for a Racket-style Environment}
 {\centering
 \noindent
-Henry Fellows, Aaron Lemmon, Max Magnuson, \par
-Emma Sax, Paul Schliep, and Elena Machkasova \par
+Henry Fellows, Thomas Hagen, and Elena Machkasova \par
 
 {\it 
-Midwest Instruction and Computing Symposium\par
-April 11, 2015\par}
+HHMI Lunch Presentation\par
+July 1, 2015\par}
 }
 \end{frame}
 %frame
@@ -64,406 +58,86 @@ April 11, 2015\par}
 \section{Introduction to the Project}
 
 \begin{frame}
-	\frametitle{Clojure in an introductory course}
-	\begin{itemize}
-		\item Developed in 2007 by Rich Hickey
-		\item Member of the Lisp family
-		\item Felleisen et al found Lisp languages to be useful in introductory courses
-		\item Current UMM course uses a Lisp language
-	\end{itemize}
+	\frametitle{Problems}
 \end{frame}
 
 \begin{frame}
-\frametitle{Motivations for the project}
-	\begin{itemize}
-		\item ClojurEd
-			\begin{itemize}
-				\item ongoing project at UMM
-				\item introduce Clojure in an introductory course
-			\end{itemize}
-		\item Our work focuses on error messages in Clojure
-			\begin{itemize}
-				\item error messages are a useful learning tool
-				\item focus on usability
-			\end{itemize}
-	\end{itemize}
+	\frametitle{Why Clojure}
 \end{frame}
-
-\section{Overview of Clojure}
 
 \begin{frame}
-\frametitle{Overview of Clojure}
-	\begin{itemize}
-  	 \item Dynamically typed
-  	 \item Data types immutable by default
-  	 \item Functional
-  	 \item Runs on the Java Virtual Machine (JVM)
-  	 \item Read-eval-print-loop (REPL)
-  	 	\begin{itemize}
-  	 	\item interactive environment
-  	 	\item useful for development and debugging
-  	 	\end{itemize}
-	 \end{itemize}
+	\frametitle{What Clojure}
 \end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Prefix notation}
-	\begin{itemize}
-  	  \item Clojure uses prefix notation
-  	  \begin{itemize}
-  	 	 \item parentheses
-  	 	 \item parameters
-  	 	 
-  	 	 \texttt{(<function-name> <argument 1> <argument 2>)}
-  	 	 \item \texttt{+} is a built-in function, not an operator
-  	 	 \begin{verbatim}		
-		 (+ 5 5)
-		 -> 10
-	     \end{verbatim}
-	  \end{itemize}
-   \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Defining functions and variables}
-	\begin{itemize}
-  	  \item \texttt{def} can be used to define variables
-  	  
-  	  \texttt{(def my-string "Hello World")}
-  	  
-  	  \texttt{my-string}
-  	  
-  	  \texttt{-> "Hello World"}
-  	  \item \texttt{defn} can be used to define functions
-  	  
-	  \texttt{(defn increment-number [number] (+ number 1))}
-	  
-	  \texttt{(increment-number 2)}
-	  
-	  \texttt{-> 3}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Collections}
-    \begin{itemize}
-        \item All collections can contain any number of values of any data type
-	    \begin{itemize}
-	      \item lists
-	      
-	      \texttt{(1 2 "foo" :a 9 "bar")}
-	      \item hashmaps (key-value pairs)
-	      
-	      \texttt{\{:a 1, :b 2, :c 3\}}
-	    \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Anonymous functions}
-	\begin{itemize}
-  	  \item Anonymous functions are a way to implement a function on the fly, and use it only once
-  	  \begin{itemize}
-  	 	\item \texttt{map} takes a function and a collection as arguments, and applies the function to the entire collection
-		\begin{verbatim}(map (fn [number] (+ number 1)) `(0 1 2 3))
-		-> (1 2 3 4)
-		\end{verbatim}
-	\end{itemize}
-   \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Lazy sequences}
-	\begin{itemize}
-  	  \item Only a needed portion of a sequence is evaluated
-  	  \begin{itemize}
-  	  	\item \texttt{take} takes the first $n$ elements of a collection
-  	  	\item \texttt{range} returns an infinite sequence of non-negative integers beginning at 0 	  	
-  	  	
-  	  	\texttt{(take 10 (range))}
-
-		\texttt{-> (0 1 2 3 4 5 6 7 8 9)}
-  	  	\item Fibonacci sequence
-  	  	
-  	  	\texttt{(1 1 2 3 5 8 13 ...)}
-  	  \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\section{Error Messages}
 
 \begin{frame}
-\frametitle{Clojure error messages: background}
-	\begin{itemize}
-  		\item Error messages should be:
-  		\begin{itemize}
-  	 		\item helpful for debugging
-  	 		\item easy to understand
-  	 		\item not intimidating
-  		\end{itemize}
-  		\item Clojure error messages are confusing
-	 \end{itemize}
-	 
+	\frametitle{Clojure Problems}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Clojure error messages: examples}
 
-\begin{itemize}
-	\item \begin{verbatim}
-EOF while reading, starting at line 3, 
-compiling:(compilation_errors/eof.clj:4:1)
-\end{verbatim}
 
-	\item \begin{verbatim}
-IllegalArgumentException Parameter declaration
-	* should be a vector 
-	clojure.core/assert-valid-fdecl (core.clj:6842)
-\end{verbatim}
+\section{Errors}
 
-\item \begin{verbatim}
-ClassCastException java.lang.String cannot be
-cast to clojure.lang.IPersistentCollection 
-clojure.core/conj (core.clj:83)
-\end{verbatim}
-
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Clojure error messages: stacktrace}
-
-\begin{verbatim}
-Exception in thread "main" java.lang.RuntimeException:
-EOF while reading, starting at line 3,
-compiling:(compilation_errors/eof.clj:4:1)
-	at clojure.lang.Compiler.load(Compiler.java:7137)
-	at clojure.lang.RT.loadResourceScript(RT.java:370)
-	at clojure.lang.RT.loadResourceScript(RT.java:361)
-	at clojure.lang.RT.load(RT.java:440)
-	at clojure.lang.RT.load(RT.java:411)
-	at clojure.core$load$fn__5066.invoke(core.clj:5641)
-	at clojure.core$load.doInvoke(core.clj:5640)
-	at clojure.lang.RestFn.invoke(RestFn.java:408)
-	at clojure.core$load_one.invoke(core.clj:5446)
-	at clojure.core$load_lib$fn__5015.invoke(core.clj:5486)
-	at clojure.core$load_lib.doInvoke(core.clj:5485)
-	at clojure.lang.RestFn.applyTo(RestFn.java:142)
-	at clojure.core$apply.invoke(core.clj:626)
-	at clojure.core$load_libs.doInvoke(core.clj:5524)
-	at clojure.lang.RestFn.applyTo(RestFn.java:137)
-	at clojure.core$apply.invoke(core.clj:626)
-	at clojure.core$require.doInvoke(core.clj:5607)
-\end{verbatim}
-\end{frame}
 \begin{frame}
-\frametitle{Error message transformation: approaches}
-	\begin{itemize}
-	 	\item Function substitution approach
-	 		\begin{itemize}
-  	 			\item add type-checking preconditions
-  	 			\item type mismatch produces custom message
-	 		\end{itemize}
-	 
-		\item Try/catch approach
-			\begin{itemize}
-  				\item wrap user's code in try/catch block
-  				\item capture error message
-  				\item check against collection of regular expressions
-  				\item replace with improved message
-			\end{itemize}
-	\end{itemize}
+	\frametitle{Current Error messages 1}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Error message transformation: discussion}
-	\begin{itemize}
-		\item Function substitution approach
-			\begin{itemize}
-				\item able to recover argument values and use them for a more meaningful message
-				\begin{verbatim}
-				(+ 2 "apple")
-				\end{verbatim}
-				\textcolor{PrettyBlue}{
-				\texttt{In function +, the second argument
-				"apple" must be a number but is a string.
-				}}
-				\item unable to handle compilation exceptions
-				\item cannot handle user-made functions
-				\item impractical to redefine all existing functions
-			\end{itemize}
-		\item Try/catch approach
-			\begin{itemize}
-	 			\item able to handle both runtime and compilation exceptions
-				\item usually cannot recover argument values
-	 		\end{itemize} 
-	\end{itemize}
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{User scenarios: example slide 1}
-	\begin{itemize}
-		\item Erroneous code fragment:
-			\begin{verbatim}
-			print(Hello World)
-			\end{verbatim}
-			
-		\item Clojure error message:
-			\begin{verbatim}
-			CompilerException java.lang.RuntimeException:
-			Unable to resolve symbol: Hello in this context
-			\end{verbatim}
-			
-		\item Our modified error message:
-		
-			\textcolor{PrettyBlue}{
-			\texttt{Compilation error: name Hello is undefined}
-			}
-		\item Student edit:
-		
-				\texttt{print(\alert{"Hello World"})}
-	\end{itemize}
-	
-\end{frame}
-\begin{frame}[fragile]
-\frametitle{User scenarios: example slide 2}
-	\begin{itemize}
-	\item Student edit:
-		
-				\texttt{print("Hello World")}
-				
-		\item Clojure error message:	
-			\begin{verbatim}
-			ClassCastException java.lang.String cannot be
-			cast to clojure.lang.IFn
-			\end{verbatim} 
-	
-		\item Our modified error message:	
-	
-			\textcolor{PrettyBlue}{
-			\texttt{Attempted to use a string, but a function
-			was expected.}}
-	
-		\item Corrected code:
-		
-			\texttt{\alert{(print} "Hello World")}
-	\end{itemize} 	
-\end{frame}
+
 \begin{frame}
-\frametitle{Hints: how they are helpful}
-	\begin{itemize}
-  	 \item Errors can have several underlying causes
-  	 \item Multiple hints per error
-  	 \item Provide more human interpretation of the issue
-  	 \item Offer suggestions on how to resolve issues
-	 \end{itemize}
+	\frametitle{Error messages Objectives}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Hints: example}
-	\begin{itemize}
-		\item Erroneous code fragment:
-		
-			\texttt{print(Hello World)}
-		
-			
-		\item Improved error message:
-		
-			\textcolor{PrettyBlue}{
-			\texttt{Compilation error: name Hello is undefined}}
-			
-		\item Hint:
-		
-			\begin{verbatim}
-	It looks like Clojure is expecting that Hello is
-	something named in your program. If you wanted Hello
-	and any following words to be plain text, try
-	surrounding them with double quotes. If Hello is
-	referring to something named in your program, make
-	sure it is spelled correctly.
-			\end{verbatim}
-	
-	\end{itemize}
-\end{frame}
+
 \begin{frame}
-\frametitle{Hints: future work}
-	\begin{itemize}
-	 \item Hints still a work in progress
-	 \item Provide links to Clojure documentation
-  	 \item Develop more user scenarios
-  	 \item Usability study with students
-	 \end{itemize}
+	\frametitle{New Error Messages}
 \end{frame}
-\section{Technical Setup}
+
 \begin{frame}
-\frametitle{Setup}
-	\begin{itemize}
-	\item Current IDE options
-	\begin{itemize}
-		\item LightTable
-			\begin{itemize}
-				\item more established
-			\end{itemize}
-		\item Nightcode
-			\begin{itemize}
-				\item newer, promising IDE
-			\end{itemize}
-		\item ongoing open source projects
-		\item IDE independent approach
-	\end{itemize}
-	\item Project manager
-	\begin{itemize}
-		\item Leiningen
-		\item popular in Clojure community
-	\end{itemize}
-	\end{itemize}
+	\frametitle{Recent Improvements}
 \end{frame}
+
 \begin{frame}
-	\frametitle {Error handling}
-	\begin{itemize}
-		\item Initial approach of try/catch
-		\item Maintain consistency between runtime, compile time, REPL
-		\item Issues with laziness
-		\item Try/catch student code does not catch all
-	\end{itemize}
+	\frametitle{Recent Improvements 2}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Current workflow diagram}
-\begin{figure}[h]
- \includegraphics[width=10cm]{../CurrentErrorHandling.pdf}
- \centering
-\end{figure}
-\end{frame}
+
 \begin{frame}
-\frametitle{Issues}
-	\begin{itemize}
-		\item Installation of Leiningen is nontrivial
-		\item Command line acts as a barrier
-		\item We do not want students managing dependencies
-		\item No integration with new error handling system
-	\end{itemize} 
+	\frametitle{Future Work}
 \end{frame}
-\begin{frame}[fragile]
-\frametitle{Proposed workflow diagram}
-\begin{figure}[h]
- \includegraphics[width=9cm]{../OurErrorHandlingSystem.pdf}
- \centering
-\end{figure}
-\end{frame}
+
+\section{Quil}
+
 \begin{frame}
-\frametitle{Future work}
-	\begin{itemize}
-	\item Error handling	
-	\begin{itemize}
-		\item currently have regular expressions
-		\item need user scenarios
-		\item usability studies
-	\end{itemize}
-	\item Technical implementation
-	\begin{itemize}
-		\item implement items in the proposed diagram
-		\item work on user interface through the IDE
-	\end{itemize}
-	\end{itemize}
+	\frametitle{What Quil}
 \end{frame}
+
+\begin{frame}
+	\frametitle{How Quil}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Why Quil is Bad}
+\end{frame}
+
+\begin{frame}
+	\frametitle{What we Want and Why}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Why we Want it}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SUPERFUNMODE}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SUPERFUNMODETWO}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Future Work}
+\end{frame}
+
+
+
+
 \begin{frame}
 \frametitle{Acknowledgments}
 	Our research was sponsored by:
@@ -472,8 +146,6 @@ compiling:(compilation_errors/eof.clj:4:1)
 	\item UMN UROP
 	\item UMM MAP
 	\end{itemize}
-	
-	
 	{\centering
 	\noindent
 	Thank you! \par
