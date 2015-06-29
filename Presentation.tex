@@ -107,7 +107,7 @@ July 1, 2015\par}
 
 
 
-\section{Quil}
+\section{Quil: Clojure's Graphical Library}
 
 \begin{frame}
 	\frametitle{What is Quil?}
@@ -133,7 +133,6 @@ July 1, 2015\par}
   	 	and make it 200 pixels wide and 200 pixels tall
 	 \end{itemize}
 \end{frame}
-
 
 \begin{frame}[fragile]
 \frametitle{Default Quil isn't enough}
@@ -163,7 +162,7 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Quil}
+\frametitle{Quil Code}
 	\item Especially when you draw more things
 	\begin{itemize}
 			\begin{verbatim}
@@ -182,6 +181,10 @@ July 1, 2015\par}
 			\end{verbatim}	
 	\end{itemize}
 \end{frame}
+%long, repetitive, LOTS of numbers and math thats really annoying
+%Does NOT scale well, very confusing to look at
+%Does NOT conceptually tie to shape
+%When you look at this ,you think about math, not your boxes
 
 \begin{frame}[fragile]
 \frametitle{Our Code}
@@ -190,25 +193,34 @@ July 1, 2015\par}
 		\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
-	  (def lime-rects (beside 
+	  (def lime-rectangles (beside 
 	  lime-rect lime-rect
 	  lime-rect lime-rect
 	  lime-rect lime-rect))
 	  						  
-	(ds lime-rects 100 100)
+	(ds lime-rectangles 100 100)
 			\end{verbatim}
 	\end{itemize}
 \end{frame}
+%Two numbers
+%You get to say "Lets put these boxes beside each other"
+%You get to draw lime-rectangles, not a much of random things
 
 \begin{frame}
 	\frametitle{What we want}
 	\begin{itemize}
 		\item Less paintbrush, more collage
+		%An artist finds more use in a brush while a beginner
+		%isn't skilled enough
 		\item Create shapes, not just draw them
+		%Teach students to think about shapes as things
+		% Drawing a flower, not 9 cut ellipisies and a circle and 
+		%a bunch of coordinates
 		\item Easier student code
-		\item Not distracting from learning basic concepts
-		\item Works with flow of basic concepts
-		\item Gives an idea of how good software should be built by giving a language like that
+		%Not distracting from learning basic concepts
+		%Works with flow of basic concepts
+		\item Gives students an idea of how good software should be built              
+		%by giving a language like that promotes it by design
 	\end{itemize}
 \end{frame}
 
@@ -216,11 +228,12 @@ July 1, 2015\par}
 	\frametitle{Why we want that}
 	\item Bigger student projects
 	\item Smoother transition into Java
-	\item 
 \end{frame}
 
 \begin{frame}
 	\frametitle{Designing SuperFunMode}
+	\item Built on top of Quil
+	\item Gives students functions, colors, images, ect..
 \end{frame}
 
 \begin{frame}
