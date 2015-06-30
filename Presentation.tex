@@ -34,14 +34,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{Improving Clojure Usablilty for Intro Course Material}
+\title{Improving Clojure Usablilty for Introductory Course}
 \date{July 1, 2015}
 
 \begin{frame}
-\frametitle {Improving Clojure Usablilty for an Intro Course Material}
+\frametitle {Improving Clojure Usablilty for Introductory Course}
 {\centering
 \noindent
-Henry Fellows, Thomas Hagen, and Elena Machkasova \par
+Henry Fellows, Thomas Hagen, Sean Stockholm, Ryan McArthur, and Elena Machkasova \par
 
 {\it 
 HHMI Lunch Presentation\par
@@ -58,55 +58,56 @@ July 1, 2015\par}
 \section{Introduction to the Project}
 
 \begin{frame}
-	\frametitle{Racket}
+	\frametitle{Goals}
 	\begin{itemize}
+		\item Integrate Clojure into an introductory CSci class
 		\item Currently use Racket
-		\item 'toy' language
-		\item Difficult to make complex projects
-		\item Students hitting performance issues
+		\begin{itemize}
+			\item Limited teaching language
+			\item Difficult to make complex projects
+			\item Students hitting performance issues
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Why Clojure}
+	\frametitle{What is Clojure?}
 	\begin{itemize}
-		\item Used in industry (real life)
-		\item Better on Resume
-		\item Large community and excellent resources
-		\item plethora of libraries (music, graphical)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{What Clojure}
-	\begin{itemize}
-		\item Clojure is a LISP built on Java
+		\item Clojure is a programming language 
+		\item Built on top of the Java programming language
 		\item Designed by Rich Hickey in 2007
 		\item Functional (composition of functions)
-		\item Built for Concurrency (simultaneous computation)
-		
+		\item Built for concurrency (simultaneous computation)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Clojure Problems}
+	\frametitle{Why use Clojure?}
 	\begin{itemize}
-		\item Terrible error messages
-		\item Missing graphics libraries for students
-		\item Language contains misleading features
-		\item Installing the environment is hard.
+		\item Used in industry (real life)
+		\item Better on resume
+		\item Many programmers enjoy using Clojure
+		\item Large community and excellent resources
+		\item Large number of libraries (data processing, image recognition, graphical, musical)
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Issues with Clojure}
+	\begin{itemize}
+		\item Confusing error messages
+		\item Missing graphics libraries for students
+		%\item Language contains misleading features
+		%\item Installing the environment is hard
+	\end{itemize}
+\end{frame}
 
-
-\section{Errors}
+\section{Error Handling}
 
 \begin{frame}
 	\frametitle{Error Messages}
 	\begin{itemize}
-		\item Computers are dumb
-		\item Only handle a narrow range of inputs
+		\item Computers are literal
 		\item Primary means of communication
 		\item Inherently difficult to create
 	\end{itemize}
@@ -129,20 +130,20 @@ July 1, 2015\par}
 		\item Interpret old errors
 		\item Replace with new message
 		\item Terminology that is friendly to novices
-		\item Optional hints to help direct students
+		\item Consistency within error messages
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Recent Improvements}
-	\begin{itemize}
-		\item Changes for Clojure 1.7.0-beta3
-		\item Revamped hints to make them more extensible
-		\item Made errors for infinite sequences useful \hfcomment{Partially print}
-		\item Working on fixing line number reporting
-		\item Fixed a large number of smaller issues
-	\end{itemize}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Recent Improvements}
+%	\begin{itemize}
+%		\item Changes for Clojure 1.7.0-beta3
+%		\item Revamped hints to make them more extensible
+%		\item Made errors for infinite sequences useful \hfcomment{Partially print}
+%		\item Working on fixing line number reporting
+%		\item Fixed a large number of smaller issues
+%	\end{itemize}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Future Work}
@@ -156,7 +157,7 @@ July 1, 2015\par}
 
 
 
-\section{Quil: Clojure's Graphical Library}
+\section{Clojure's Graphical Library}
 
 \begin{frame}[fragile]
 	\frametitle{What is Quil?}
@@ -172,10 +173,11 @@ July 1, 2015\par}
   	 		\item Make games, pictures, ect..
   		\end{itemize}
   		\end{itemize}
-  		 Quil sits on top of Clojure
 		\end{column}
 		\begin{column}{.45\textwidth}
 			\begin{verbatim}
+			super-fun-mode
+			^
 			fun-mode
 			^
 			Quil
@@ -184,6 +186,7 @@ July 1, 2015\par}
 			^
 			Java
 			\end{verbatim}
+			%Turn into revealing stack using thing
 		\end{column}
 		\end{columns}
 \end{frame}
@@ -192,24 +195,27 @@ July 1, 2015\par}
 
 
 
-\begin{frame}
-	\frametitle{How does Quil work?}
-	\begin{itemize}
-  		\item Quil takes draw commands
-  		%This means you tell quil what to draw and thats it
-  	 	\item What you type: (q/rect 500 500 200 200)
-  	 	\item What Quil sees: Draw a rectangle at (500, 500)\par 
-  	 	and make it 200 pixels wide and 200 pixels tall
-  	 	%You can draw many shapes and import images
-	 \end{itemize}
-\end{frame}
+%\begin{frame}
+%	\frametitle{How does Quil work?}
+%	\begin{itemize}
+%  		\item Quil takes draw commands
+%  		%This means you tell quil what to draw and thats it
+%  	 	\item What you type: (q/rect 500 500 200 200)
+%  	 	\item What Quil sees: Draw a rectangle at (500, 500)\par 
+%  	 	and make it 200 pixels wide and 200 pixels tall
+%  	 	%You can draw many shapes and import images
+%	 \end{itemize}
+%\end{frame}
+
+%Visualizing a rectangle in the abstract vs in your head
+
 
 \begin{frame}[fragile]
 \frametitle{Quil's fun-mode isn't enough}
 	\begin{itemize}
 		\item Quil ONLY takes draw commands
 		%You can't make a circle template and then use it multiple times
-		\item Quil doesn't follow MVC
+		\item Quil doesn't separate the model from the view
 		%Computer science principle of design
 		%Split between your Model, what your information is in
 		%Your view, or what you see
@@ -230,7 +236,7 @@ July 1, 2015\par}
 		\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
-	(ds lime-rect 100 100)
+	(draw-shape lime-rect 100 100)
 		\end{verbatim}
 		\end{column}
 		\begin{column}{.45\textwidth}
@@ -246,8 +252,10 @@ July 1, 2015\par}
 \begin{frame}
 	\frametitle{Designing super-fun-mode}
 	\begin{itemize}
+	%Cat picture here
 		\item Built on top of Quil
 		\item Gives students functions, colors, images, ect..
+		\item Easy to read and change program code
 		\item Allows for easy complex shapes
 	\end{itemize}
 \end{frame}
@@ -285,7 +293,7 @@ July 1, 2015\par}
 		\begin{column}{.55\textwidth}
 		\item You can put shapes together to make complex shapes
 		\begin{verbatim}
-(def rainbow 
+(def tower 
     (above red-square 
            orange-square 
            yellow-square 
@@ -404,6 +412,7 @@ July 1, 2015\par}
 	\end{itemize}
 \end{frame}
 
+%Build house slides, round window
 
 \begin{frame}
 	\frametitle{Our Direction}
@@ -424,16 +433,6 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Improvements from Using Quil}
-	\begin{itemize}
-		\item Experience with language used in the industry
-		\item More control for future improvement
-		\item Bigger student projects
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}
 	\frametitle{A Few Examples}
 	 Please Enjoy a Few Live Examples
 \end{frame}
@@ -447,19 +446,18 @@ July 1, 2015\par}
 			\item Pixel-detail Overlay and Overlay-Align
 			\item More seemless integration with Quil fun-mode
 		\end{itemize}
+		\item Open Source the project
+		\item Integrate a Clojure sound library
+		\item Present at Twin Cities Clojure Meetup, MN on June 8th
 	\end{itemize}
 \end{frame}
-
-
-
 
 \begin{frame}
 \frametitle{Acknowledgments}
 	Our research was sponsored by:
 	\begin{itemize}
 	\item HHMI
-	\item UMN UROP
-	\item UMM MAP
+	\item LSAMP
 	\end{itemize}
 	{\centering
 	\noindent
