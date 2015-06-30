@@ -97,9 +97,8 @@ July 1, 2015\par}
 	\frametitle{Current Error Messages}
 	\begin{itemize}
 		\item Incredibly awful
-		\item Use strange terminology
+		\item Use language that novices would not know
 		\item Meaningless to most people
-		\item Extremely bulky
 	\end{itemize}
 \end{frame}
 
@@ -109,28 +108,19 @@ July 1, 2015\par}
 		\item Interpret old errors
 		\item Replace with new message
 		\item Terminology that is friendly to novices
-		\item Optional hints to help direct students
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Recent Improvements}
-	\begin{itemize}
-		\item Changes for Clojure 1.7.0-beta3
-		\item Revamped hints to make them more extensible
-		\item Made errors for infinite sequences useful \hfcomment{Partially print}
-		\item Working on fixing line number reporting
-		\item Fixed a large number of smaller issues
-	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Recent Improvements 2}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Future Work}
-	\begin{itemize}
-		\item Look into integrating this with and IDE \hfcomment{Explain}
-		\item Spin off our utilities into separate libraries
-		\item 
-	\end{itemize}
 \end{frame}
 
 
@@ -177,27 +167,36 @@ July 1, 2015\par}
 		%Quil integrates their model and their view, so the thing that holds your information also draws it
 		\item Quil code can get confusing and long
 		
-			\begin{verbatim}
+			
+		\begin{columns}[t]
+		\begin{column}{.55\textwidth}
+		\begin{verbatim}
 	(q/fill 80 255 80)
 	(q/rect 100 100 50 50)
 	(q/no-fill)
 	(q/no-stroke)
 			\end{verbatim}	
-
-
 		\item versus
 		\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
 	(ds lime-rect 100 100)
-			\end{verbatim}
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.45\textwidth}
+			\begin{figure}[h]
+			\includegraphics[width=2cm]{PresentationImages/lime-rectangle.png}
+			\end{figure}
+		\end{column}
+		\end{columns}
+		
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Six Squares}
 	\begin{itemize}
-		\item Especially when you draw more things
+		\item Especially when you draw more things,\par such as complex shapes
 	\end{itemize}
 		\begin{figure}[h]
 			\includegraphics[width=7cm]{PresentationImages/lime-rectangles.png}
@@ -288,51 +287,101 @@ July 1, 2015\par}
 \begin{frame}[fragile]
 	\frametitle{How super-fun-mode works}
 	\begin{itemize}
-		\item You start by creating a shape
+	\item You start by creating a shape
 		\begin{verbatim}
 		(def red-square 
 		  (create-rect 50 50 :red))
 		\end{verbatim}
+		\item Note that creating a shape does not draw it
+	\begin{columns}[t]
+		\begin{column}{.55\textwidth}
 		\item From there, you can draw the shape
 		\begin{verbatim}
 		(ds red-square 500 500)
 		\end{verbatim}
+		\end{column}
+		\begin{column}{.15\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.6cm]{PresentationImages/red-rectangle.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
+		
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{How super-fun-mode works}
 	\begin{itemize}
+	\begin{columns}[t]
+		\begin{column}{.55\textwidth}
 		\item You can put shapes together to make complex shapes
 		\begin{verbatim}
-  (def rainbow (above red-square 
-                      orange-square 
-                      yellow-square 
-                      green-square 
-                      blue-square 
-                      violet-square))
+(def rainbow 
+    (above red-square 
+           orange-square 
+           yellow-square 
+           green-square 
+           blue-square 
+           violet-square))
 		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1cm]{PresentationImages/rainbow.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{How super-fun-mode works}
 	\begin{itemize}
-		\item You can modify the size and orientation of the shape
+	\item You can modify the size and orientation of the shape
+	\begin{columns}[t]
+		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-		(ds (rotate-shape red-square 45) 500 500)
+		(ds (rotate-shape red-square 45) 
+		  500 500)
 		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=0.8cm]{PresentationImages/red-rectangle-rotate.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
 		\item or 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-		(ds (scale-shape red-square 2 2) 500 500)
+		(ds (scale-shape red-square 2 2) 
+		  500 500)
 		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.2cm]{PresentationImages/red-rectangle-scale.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
 		\item or even 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-(ds (rotate-shape 
+		(ds (rotate-shape 
       (scale-shape red-square 2 2) 
      45)
   500 500)
 		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.7cm]{PresentationImages/red-rectangle-scale-rotate.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
 	\end{itemize}
 \end{frame}
 
