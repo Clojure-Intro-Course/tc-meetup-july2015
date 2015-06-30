@@ -158,9 +158,12 @@ July 1, 2015\par}
 
 \section{Quil: Clojure's Graphical Library}
 
-\begin{frame}
+\begin{frame}[fragile]
 	\frametitle{What is Quil?}
-	\begin{itemize}
+
+  		\begin{columns}[t]
+		\begin{column}{.55\textwidth}
+		\begin{itemize}
   		\item Graphical Library for Clojure
   		\item It can:
   		\begin{itemize}
@@ -168,9 +171,26 @@ July 1, 2015\par}
   	 		\item Move objects on the screen
   	 		\item Make games, pictures, ect..
   		\end{itemize}
-  		\item Quil sits on top of Clojure
-	 \end{itemize}
+  		\end{itemize}
+  		 Quil sits on top of Clojure
+		\end{column}
+		\begin{column}{.45\textwidth}
+			\begin{verbatim}
+			fun-mode
+			^
+			Quil
+			^
+			Clojure
+			^
+			Java
+			\end{verbatim}
+		\end{column}
+		\end{columns}
 \end{frame}
+
+
+
+
 
 \begin{frame}
 	\frametitle{How does Quil work?}
@@ -259,9 +279,7 @@ July 1, 2015\par}
 
 \begin{frame}[fragile]
 \frametitle{Our Code}
-	\begin{itemize}
-		\item versus
-		\begin{verbatim}
+	\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
 	  
@@ -271,8 +289,7 @@ July 1, 2015\par}
 	    lime-rect lime-rect lime-rect))
 	  						  
 	(ds lime-rectangles 100 100)
-			\end{verbatim}
-	\end{itemize}
+	\end{verbatim}
 \end{frame}
 %Two numbers
 %You get to say "Lets put these boxes beside each other"
@@ -381,8 +398,7 @@ July 1, 2015\par}
 			\includegraphics[width=0.8cm]{PresentationImages/red-rectangle-rotate.png}
 			\end{figure}		
 		\end{column}
-		\end{columns}
-		\item or 
+		\end{columns} 
 		\begin{columns}[t]
 		\begin{column}{.45\textwidth}
 		\begin{verbatim}
@@ -395,8 +411,7 @@ July 1, 2015\par}
 			\includegraphics[width=1.2cm]{PresentationImages/red-rectangle-scale.png}
 			\end{figure}		
 		\end{column}
-		\end{columns}
-		\item or even 
+		\end{columns} 
 		\begin{columns}[t]
 		\begin{column}{.45\textwidth}
 		\begin{verbatim}
@@ -413,6 +428,10 @@ July 1, 2015\par}
 		\end{column}
 		\end{columns}
 	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{A Few Examples}
+	 Please Enjoy a Few Live Examples
 \end{frame}
 
 \begin{frame}
