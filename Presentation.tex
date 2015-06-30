@@ -34,11 +34,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{Restructuring Clojure for a Racket-style Environment}
+\title{Improving Clojure Usablilty for Intro Course Material}
 \date{July 1, 2015}
 
 \begin{frame}
-\frametitle {Restructuring Clojure for a Racket-style Environment}
+\frametitle {Improving Clojure Usablilty for an Intro Course Material}
 {\centering
 \noindent
 Henry Fellows, Thomas Hagen, and Elena Machkasova \par
@@ -62,7 +62,7 @@ July 1, 2015\par}
 	\begin{itemize}
 		\item Currently use Racket
 		\item 'toy' language
-		\item difficult to make complex projects
+		\item Difficult to make complex projects
 		\item Students hitting performance issues
 	\end{itemize}
 \end{frame}
@@ -80,7 +80,7 @@ July 1, 2015\par}
 \begin{frame}
 	\frametitle{What Clojure}
 	\begin{itemize}
-		\item Clojure is a LISP
+		\item Clojure is a LISP built on Java
 		\item Designed by Rich Hickey in 2007
 		\item Functional (composition of functions)
 		\item Built for Concurrency (simultaneous computation)
@@ -147,7 +147,7 @@ July 1, 2015\par}
 \begin{frame}
 	\frametitle{Future Work}
 	\begin{itemize}
-		\item Look into integrating this with and IDE \hfcomment{Explain}
+		\item Look into integrating this with an IDE \hfcomment{Explain}
 		\item Spin off our utilities into separate libraries
 		\item 
 	\end{itemize}
@@ -244,85 +244,6 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Six Squares}
-	\begin{itemize}
-		\item Especially when you draw more things,\par such as complex shapes
-	\end{itemize}
-		\begin{figure}[h]
-			\includegraphics[width=7cm]{PresentationImages/lime-rectangles.png}
-			\centering
-		\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Quil Code}
-		\begin{verbatim}
-  (let [x 100
-  		num 6
-  		dist (+ 100 (* (\ num 2) 50))]
-	(q/fill 80 255 80)
-	(q/rect (- dist (* 1 50)) 100 50 50)
-	(q/rect (- dist (* 2 50)) 100 50 50)
-	(q/rect (- dist (* 3 50)) 100 50 50)
-	(q/rect (- dist (* 4 50)) 100 50 50)
-	(q/rect (- dist (* 5 50)) 100 50 50)
-	(q/rect (- dist (* 6 50)) 100 50 50))
-	(q/no-fill)
-	(q/no-stroke)
-		\end{verbatim}	
-
-\end{frame}
-%long, repetitive, LOTS of numbers and math thats really annoying
-%Does NOT scale well, very confusing to look at
-%Does NOT conceptually tie to shape
-%When you look at this ,you think about math, not your boxes
-
-\begin{frame}[fragile]
-\frametitle{Our Code}
-	\begin{verbatim}
-	(def lime-rect 
-	  (create-rect 50 50 :lime))
-	  
-	(def lime-rectangles 
-	  (beside 
-	    lime-rect lime-rect lime-rect 
-	    lime-rect lime-rect lime-rect))
-	  						  
-	(ds lime-rectangles 100 100)
-	\end{verbatim}
-\end{frame}
-%Two numbers
-%You get to say "Lets put these boxes beside each other"
-%You get to draw lime-rectangles, not a much of random things
-
-\begin{frame}
-	\frametitle{Our Direction}
-	\begin{itemize}
-		\item Less paintbrush, more collage
-		%An artist finds more use in a brush while a beginner
-		%isn't skilled enough
-		\item Create shapes, not just draw them
-		%Teach students to think about shapes as things
-		% Drawing a flower, not 9 cut ellipisies and a circle and 
-		%a bunch of coordinates
-		\item Easier student code
-		%Not distracting from learning basic concepts
-		%Works with flow of basic concepts
-		\item Give students an idea of how good software should be built              
-		%by giving a language like that promotes it by design
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Improvements from Using Quil}
-	\begin{itemize}
-		\item Experience with language used in the industry
-		\item More control for future improvement
-		\item Bigger student projects
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
 	\frametitle{Designing super-fun-mode}
 	\begin{itemize}
 		\item Built on top of Quil
@@ -382,6 +303,59 @@ July 1, 2015\par}
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Six Squares}
+	\begin{itemize}
+		\item Especially when you draw more things,\par such as complex shapes
+	\end{itemize}
+		\begin{figure}[h]
+			\includegraphics[width=7cm]{PresentationImages/lime-rectangles.png}
+			\centering
+		\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quil Code}
+		\begin{verbatim}
+  (let [x 100
+  		num 6
+  		dist (+ 100 (* (\ num 2) 50))]
+	(q/fill 80 255 80)
+	(q/rect (- dist (* 1 50)) 100 50 50)
+	(q/rect (- dist (* 2 50)) 100 50 50)
+	(q/rect (- dist (* 3 50)) 100 50 50)
+	(q/rect (- dist (* 4 50)) 100 50 50)
+	(q/rect (- dist (* 5 50)) 100 50 50)
+	(q/rect (- dist (* 6 50)) 100 50 50))
+	(q/no-fill)
+	(q/no-stroke)
+		\end{verbatim}	
+
+\end{frame}
+%long, repetitive, LOTS of numbers and math thats really annoying
+%Does NOT scale well, very confusing to look at
+%Does NOT conceptually tie to shape
+%When you look at this ,you think about math, not your boxes
+
+\begin{frame}[fragile]
+\frametitle{Our Code}
+	\begin{verbatim}
+	(def lime-rect 
+	  (create-rect 50 50 :lime))
+	  
+	(def lime-rectangles 
+	  (beside 
+	    lime-rect lime-rect lime-rect 
+	    lime-rect lime-rect lime-rect))
+	  						  
+	(ds lime-rectangles 100 100)
+	\end{verbatim}
+\end{frame}
+%Two numbers
+%You get to say "Lets put these boxes beside each other"
+%You get to draw lime-rectangles, not a much of random things
+
+
 \begin{frame}[fragile]
 	\frametitle{How super-fun-mode works}
 	\begin{itemize}
@@ -429,6 +403,36 @@ July 1, 2015\par}
 		\end{columns}
 	\end{itemize}
 \end{frame}
+
+
+\begin{frame}
+	\frametitle{Our Direction}
+	\begin{itemize}
+		\item Less paintbrush, more collage
+		%An artist finds more use in a brush while a beginner
+		%isn't skilled enough
+		\item Create shapes, not just draw them
+		%Teach students to think about shapes as things
+		% Drawing a flower, not 9 cut ellipisies and a circle and 
+		%a bunch of coordinates
+		\item Easier student code
+		%Not distracting from learning basic concepts
+		%Works with flow of basic concepts
+		\item Give students an idea of how good software should be built              
+		%by giving a language like that promotes it by design
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Improvements from Using Quil}
+	\begin{itemize}
+		\item Experience with language used in the industry
+		\item More control for future improvement
+		\item Bigger student projects
+	\end{itemize}
+\end{frame}
+
+
 \begin{frame}
 	\frametitle{A Few Examples}
 	 Please Enjoy a Few Live Examples
