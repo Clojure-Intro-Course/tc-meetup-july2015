@@ -176,8 +176,6 @@ July 1, 2015\par}
 		\end{column}
 		\begin{column}{.45\textwidth}
 			\begin{verbatim}
-			super-fun-mode
-			^
 			fun-mode
 			^
 			Quil
@@ -186,29 +184,9 @@ July 1, 2015\par}
 			^
 			Java
 			\end{verbatim}
-			%Turn into revealing stack using thing
 		\end{column}
 		\end{columns}
 \end{frame}
-
-
-
-
-
-%\begin{frame}
-%	\frametitle{How does Quil work?}
-%	\begin{itemize}
-%  		\item Quil takes draw commands
-%  		%This means you tell quil what to draw and thats it
-%  	 	\item What you type: (q/rect 500 500 200 200)
-%  	 	\item What Quil sees: Draw a rectangle at (500, 500)\par 
-%  	 	and make it 200 pixels wide and 200 pixels tall
-%  	 	%You can draw many shapes and import images
-%	 \end{itemize}
-%\end{frame}
-
-%Visualizing a rectangle in the abstract vs in your head
-
 
 \begin{frame}[fragile]
 \frametitle{Quil's fun-mode isn't enough}
@@ -217,10 +195,8 @@ July 1, 2015\par}
 		%You can't make a circle template and then use it multiple times
 		\item Quil doesn't separate the model from the view
 		%Computer science principle of design
-		%Split between your Model, what your information is in
-		%Your view, or what you see
-		%and your Controller, or what changes things behind the scenes
 		%Quil integrates their model and their view, so the thing that holds your information also draws it
+		%Visualizing a rectangle in the abstract vs in your head
 		\item Quil code can get confusing and long
 		
 			
@@ -231,13 +207,7 @@ July 1, 2015\par}
 	(q/rect 100 100 50 50)
 	(q/no-fill)
 	(q/no-stroke)
-			\end{verbatim}	
-		\item versus
-		\begin{verbatim}
-	(def lime-rect 
-	  (create-rect 50 50 :lime))
-	(draw-shape lime-rect 100 100)
-		\end{verbatim}
+			\end{verbatim}
 		\end{column}
 		\begin{column}{.45\textwidth}
 			\begin{figure}[h]
@@ -249,14 +219,31 @@ July 1, 2015\par}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
 	\frametitle{Designing super-fun-mode}
 	\begin{itemize}
 	%Cat picture here
-		\item Built on top of Quil
+	\begin{columns}[t]
+		\begin{column}{.55\textwidth}
+		\item Built on top of fun-mode
 		\item Gives students functions, colors, images, ect..
 		\item Easy to read and change program code
 		\item Allows for easy complex shapes
+		\end{column}
+		\begin{column}{.45\textwidth}
+			\begin{verbatim}
+			super-fun-mode
+			^
+			fun-mode
+			^
+			Quil
+			^
+			Clojure
+			^
+			Java
+			\end{verbatim}
+		\end{column}
+		\end{columns}
 	\end{itemize}
 \end{frame}
 
@@ -273,7 +260,7 @@ July 1, 2015\par}
 		\begin{column}{.55\textwidth}
 		\item From there, you can draw the shape
 		\begin{verbatim}
-		(ds red-square 500 500)
+		(draw-shape red-square 500 500)
 		\end{verbatim}
 		\end{column}
 		\begin{column}{.15\textwidth}
@@ -287,7 +274,7 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{How super-fun-mode works}
+	\frametitle{super-fun-mode Complex Shapes}
 	\begin{itemize}
 	\begin{columns}[t]
 		\begin{column}{.55\textwidth}
@@ -314,7 +301,7 @@ July 1, 2015\par}
 \begin{frame}
 	\frametitle{Six Squares}
 	\begin{itemize}
-		\item Especially when you draw more things,\par such as complex shapes
+		\item The difference becomes quite apparent with complexity 
 	\end{itemize}
 		\begin{figure}[h]
 			\includegraphics[width=7cm]{PresentationImages/lime-rectangles.png}
@@ -356,23 +343,21 @@ July 1, 2015\par}
 	    lime-rect lime-rect lime-rect 
 	    lime-rect lime-rect lime-rect))
 	  						  
-	(ds lime-rectangles 100 100)
 	\end{verbatim}
 \end{frame}
 %Two numbers
 %You get to say "Lets put these boxes beside each other"
-%You get to draw lime-rectangles, not a much of random things
+%You get to draw lime-rectangles, not a bunch of random things
 
 
 \begin{frame}[fragile]
-	\frametitle{How super-fun-mode works}
+	\frametitle{Rotation and Scaling}
 	\begin{itemize}
 	\item You can modify the size and orientation of the shape
 	\begin{columns}[t]
 		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-		(ds (rotate-shape red-square 45) 
-		  500 500)
+		(rotate-shape red-square 45)
 		\end{verbatim}
 		\end{column}
 		\begin{column}{.3\textwidth}
@@ -384,8 +369,7 @@ July 1, 2015\par}
 		\begin{columns}[t]
 		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-		(ds (scale-shape red-square 2 2) 
-		  500 500)
+		(scale-shape red-square 2 2)
 		\end{verbatim}
 		\end{column}
 		\begin{column}{.3\textwidth}
@@ -397,10 +381,10 @@ July 1, 2015\par}
 		\begin{columns}[t]
 		\begin{column}{.45\textwidth}
 		\begin{verbatim}
-		(ds (rotate-shape 
-      (scale-shape red-square 2 2) 
-     45)
-  500 500)
+		(rotate-shape 
+		  (scale-shape red-square 2 2)
+		 45)
+
 		\end{verbatim}
 		\end{column}
 		\begin{column}{.3\textwidth}
@@ -412,6 +396,60 @@ July 1, 2015\par}
 	\end{itemize}
 \end{frame}
 
+
+
+\begin{frame}[fragile]
+	\frametitle{Overlaying and Complex Shapes}
+	\begin{itemize}
+	\item You can put shapes on top of each other 
+	\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(overlay window roof)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.22cm]{PresentationImages/roof.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(overlay-align :bottom :center 
+		     door 
+		     red-rect)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.2cm]{PresentationImages/body.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(scale-shape 
+		  (above (overlay top bottom)) 
+		1.4 1.4)
+
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=2cm]{PresentationImages/house.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
+	\end{itemize}
+	
+\end{frame}
+
+
+
+
 %Build house slides, round window
 
 \begin{frame}
@@ -421,7 +459,7 @@ July 1, 2015\par}
 		%An artist finds more use in a brush while a beginner
 		%isn't skilled enough
 		\item Create shapes, not just draw them
-		%Teach students to think about shapes as things
+		%Teach students to think about shapes without positions
 		% Drawing a flower, not 9 cut ellipisies and a circle and 
 		%a bunch of coordinates
 		\item Easier student code
