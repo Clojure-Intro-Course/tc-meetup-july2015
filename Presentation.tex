@@ -62,10 +62,12 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Why Clojure}
-	\item Wider industry use
-	\item Better on Resume
-	\item plethora of libraries (music, graphical)
+	\begin{itemize}
+		\frametitle{Why Clojure}
+		\item Wider industry use
+		\item Better on Resume
+		\item plethora of libraries (music, graphical)
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -148,13 +150,15 @@ July 1, 2015\par}
   	 	\item What you type: (q/rect 500 500 200 200)
   	 	\item What Quil sees: Draw a rectangle at (500, 500)\par 
   	 	and make it 200 pixels wide and 200 pixels tall
+  	 	%You can draw many shapes and import images
 	 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Default Quil isn't enough}
+\frametitle{Quil's fun-mode isn't enough}
 	\begin{itemize}
 		\item Quil ONLY takes draw commands
+		%You can't make a circle template and then use it multiple times
 		\item Quil doesn't follow MVC
 		\item Quil code can get confusing and long
 		
@@ -174,8 +178,10 @@ July 1, 2015\par}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Six Squares
-	\item PICTURE OF 6 SQUARES}
+	\frametitle{Six Squares}
+	\begin{itemize}
+	\item PICTURE OF 6 SQUARES
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -210,10 +216,11 @@ July 1, 2015\par}
 		\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
-	  (def lime-rectangles (beside 
-	  lime-rect lime-rect
-	  lime-rect lime-rect
-	  lime-rect lime-rect))
+	  
+	(def lime-rectangles 
+	  (beside 
+	    lime-rect lime-rect lime-rect 
+	    lime-rect lime-rect lime-rect))
 	  						  
 	(ds lime-rectangles 100 100)
 			\end{verbatim}
@@ -224,7 +231,7 @@ July 1, 2015\par}
 %You get to draw lime-rectangles, not a much of random things
 
 \begin{frame}
-	\frametitle{What we want}
+	\frametitle{Our Direction}
 	\begin{itemize}
 		\item Less paintbrush, more collage
 		%An artist finds more use in a brush while a beginner
@@ -236,29 +243,88 @@ July 1, 2015\par}
 		\item Easier student code
 		%Not distracting from learning basic concepts
 		%Works with flow of basic concepts
-		\item Gives students an idea of how good software should be built              
+		\item Give students an idea of how good software should be built              
 		%by giving a language like that promotes it by design
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Why we want that}
-	\item Bigger student projects
-	\item Smoother transition into Java
+	\frametitle{Improvements from Using Quil}
+	\begin{itemize}
+		\item Experience with language used in the industry
+		\item More control for future improvement
+		\item Bigger student projects
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Designing SuperFunMode}
-	\item Built on top of Quil
-	\item Gives students functions, colors, images, ect..
+	\frametitle{Designing super-fun-mode}
+	\begin{itemize}
+		\item Built on top of Quil
+		\item Gives students functions, colors, images, ect..
+		\item Allows for easy complex shapes
+	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{SuperFunMode Cont.}
+\begin{frame}[fragile]
+	\frametitle{How super-fun-mode works}
+	\begin{itemize}
+		\item You start by creating a shape
+		\begin{verbatim}
+		(def red-square 
+		  (create-rect 50 50 :red))
+		\end{verbatim}
+		\item From there, you can draw the shape
+		\begin{verbatim}
+		(ds red-square 500 500)
+		\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{How super-fun-mode works}
+	\begin{itemize}
+		\item You can put shapes together to make complex shapes
+		\begin{verbatim}
+  (def rainbow (above red-square 
+                      orange-square 
+                      yellow-square 
+                      green-square 
+                      blue-square 
+                      violet-square))
+		\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{How super-fun-mode works}
+	\begin{itemize}
+		\item You can modify the size and orientation of the shape
+		\begin{verbatim}
+		(ds (rotate-shape red-square 45) 500 500)
+		\end{verbatim}
+		\item or 
+		\begin{verbatim}
+		(ds (scale-shape red-square 2 2) 500 500)
+		\end{verbatim}
+		\item or even 
+		\begin{verbatim}
+(ds (rotate-shape 
+      (scale-shape red-square 2 2) 
+     45)
+  500 500)
+		\end{verbatim}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Future Work}
+	\item Fill out more functionality
+	\begin{itemize}
+		\item Rotate more complex shapes
+		\item Pixel-detail Overlay and Overlay-Align
+		\item More seemless integration with Quil fun-mode
+	\end{itemize}
 \end{frame}
 
 
