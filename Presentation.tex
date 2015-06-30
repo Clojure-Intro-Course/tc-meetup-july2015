@@ -160,6 +160,11 @@ July 1, 2015\par}
 		\item Quil ONLY takes draw commands
 		%You can't make a circle template and then use it multiple times
 		\item Quil doesn't follow MVC
+		%Computer science principle of design
+		%Split between your Model, what your information is in
+		%Your view, or what you see
+		%and your Controller, or what changes things behind the scenes
+		%Quil integrates their model and their view, so the thing that holds your information also draws it
 		\item Quil code can get confusing and long
 		
 			\begin{verbatim}
@@ -168,6 +173,8 @@ July 1, 2015\par}
 	(q/no-fill)
 	(q/no-stroke)
 			\end{verbatim}	
+
+
 		\item versus
 		\begin{verbatim}
 	(def lime-rect 
@@ -180,15 +187,17 @@ July 1, 2015\par}
 \begin{frame}
 	\frametitle{Six Squares}
 	\begin{itemize}
-	\item PICTURE OF 6 SQUARES
+		\item Especially when you draw more things
 	\end{itemize}
+		\begin{figure}[h]
+			\includegraphics[width=7cm]{PresentationImages/lime-rectangles.png}
+			\centering
+		\end{figure}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Quil Code}
-	\item Especially when you draw more things
-	\begin{itemize}
-			\begin{verbatim}
+		\begin{verbatim}
   (let [x 100
   		num 6
   		dist (+ 100 (* (\ num 2) 50))]
@@ -201,8 +210,8 @@ July 1, 2015\par}
 	(q/rect (- dist (* 6 50)) 100 50 50))
 	(q/no-fill)
 	(q/no-stroke)
-			\end{verbatim}	
-	\end{itemize}
+		\end{verbatim}	
+
 \end{frame}
 %long, repetitive, LOTS of numbers and math thats really annoying
 %Does NOT scale well, very confusing to look at
@@ -319,11 +328,13 @@ July 1, 2015\par}
 
 \begin{frame}
 	\frametitle{Future Work}
-	\item Fill out more functionality
 	\begin{itemize}
-		\item Rotate more complex shapes
-		\item Pixel-detail Overlay and Overlay-Align
-		\item More seemless integration with Quil fun-mode
+		\item Fill out more functionality
+		\begin{itemize}
+			\item Rotate more complex shapes
+			\item Pixel-detail Overlay and Overlay-Align
+			\item More seemless integration with Quil fun-mode
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
