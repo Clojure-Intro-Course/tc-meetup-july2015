@@ -334,8 +334,24 @@ Found in file core.clj on line 107 in function -main.
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{How super-fun-mode works technically}
+	\begin{itemize}
+	\item Underneath, super-fun-mode builds a hashmap or a vector of hashmaps (in the case of complex shapes) with holds relevant information including:
+	\begin{itemize}
+		\item The shape's width and height
+		\item The complex shape's width and height
+		\item The rotation angle of the shape
+		\item The function to draw the shape
+		\end{itemize}
+		
+	\end{itemize}
+\end{frame}
+
+
+
 \begin{frame}[fragile]
-	\frametitle{super-fun-mode Complex Shapes}
+	\frametitle{super-fun-mode complex shapes}
 	\begin{itemize}
 	\begin{columns}[t]
 		\begin{column}{.55\textwidth}
@@ -360,7 +376,7 @@ Found in file core.clj on line 107 in function -main.
 \end{frame}
 
 \begin{frame}
-	\frametitle{Six Squares}
+	\frametitle{Six squares}
 	\begin{itemize}
 		\item The difference becomes quite apparent with complexity 
 	\end{itemize}
@@ -371,20 +387,19 @@ Found in file core.clj on line 107 in function -main.
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Quil Code}
+\frametitle{Quil code}
 		\begin{verbatim}
-  (let [x 100
-  		num 6
-  		dist (+ 100 (* (\ num 2) 50))]
-	(q/fill 80 255 80)
-	(q/rect (- dist (* 1 50)) 100 50 50)
-	(q/rect (- dist (* 2 50)) 100 50 50)
-	(q/rect (- dist (* 3 50)) 100 50 50)
-	(q/rect (- dist (* 4 50)) 100 50 50)
-	(q/rect (- dist (* 5 50)) 100 50 50)
-	(q/rect (- dist (* 6 50)) 100 50 50))
+(let [x 100
+  		   numb 6
+  		   dist (+ 100 (* (\ numb 2) 50))]
+	  (q/fill 80 255 80)
+	  (q/rect (- dist (* 1 50)) 100 50 50)
+	  (q/rect (- dist (* 2 50)) 100 50 50)
+	  (q/rect (- dist (* 3 50)) 100 50 50)
+	  (q/rect (- dist (* 4 50)) 100 50 50)
+	  (q/rect (- dist (* 5 50)) 100 50 50)
+	  (q/rect (- dist (* 6 50)) 100 50 50))
 	(q/no-fill)
-	(q/no-stroke)
 		\end{verbatim}	
 
 \end{frame}
@@ -394,7 +409,7 @@ Found in file core.clj on line 107 in function -main.
 %When you look at this ,you think about math, not your boxes
 
 \begin{frame}[fragile]
-\frametitle{Our Code}
+\frametitle{Our code}
 	\begin{verbatim}
 	(def lime-rect 
 	  (create-rect 50 50 :lime))
@@ -412,7 +427,7 @@ Found in file core.clj on line 107 in function -main.
 
 
 \begin{frame}[fragile]
-	\frametitle{Rotation and Scaling}
+	\frametitle{Rotation and scaling}
 	\begin{itemize}
 	\item You can modify the size and orientation of the shape
 	\begin{columns}[t]
@@ -460,7 +475,7 @@ Found in file core.clj on line 107 in function -main.
 
 
 \begin{frame}[fragile]
-	\frametitle{Overlaying and Complex Shapes}
+	\frametitle{Overlaying and complex shapes}
 	\begin{itemize}
 	\item You can put shapes on top of each other 
 	\begin{columns}[t]
@@ -508,13 +523,65 @@ Found in file core.clj on line 107 in function -main.
 	
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{Other complex functions}
+	\begin{itemize}
+	\item You can orient your besides and aboves as well
+	\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+(beside-align :top 
+              tower 
+              tight-rope 
+              tower)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.22cm]{PresentationImages/towers.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+(above-align :right 
+             block1 
+             block1.3
+             block1.6)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.1cm]{PresentationImages/left-tower.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+(beside-align :top 
+              tower-aligned-R 
+              tight-rope 
+              tower-aligned-L)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.5cm]{PresentationImages/two-tower.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
+	\end{itemize}
+	
+\end{frame}
 
 
 
 %Build house slides, round window
 
 \begin{frame}
-	\frametitle{Our Direction}
+	\frametitle{Our direction}
 	\begin{itemize}
 		\item Less paintbrush, more collage
 		%An artist finds more use in a brush while a beginner
@@ -532,12 +599,12 @@ Found in file core.clj on line 107 in function -main.
 \end{frame}
 
 \begin{frame}
-	\frametitle{A Few Examples}
+	\frametitle{A few examples}
 	 Please Enjoy a Few Live Examples
 \end{frame}
 
 \begin{frame}
-	\frametitle{Future Work}
+	\frametitle{Future work}
 	\begin{itemize}
 		\item Fill out more functionality
 		\begin{itemize}
@@ -547,7 +614,6 @@ Found in file core.clj on line 107 in function -main.
 		\end{itemize}
 		\item Open Source the project
 		\item Integrate a Clojure sound library
-		\item Present at Twin Cities Clojure Meetup, MN on June 8th
 	\end{itemize}
 \end{frame}
 
