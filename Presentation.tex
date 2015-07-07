@@ -35,7 +35,7 @@
 
 \begin{document}
 \title{Improving Clojure Usablilty for Introductory Course}
-\date{July 1, 2015}
+\date{July 8, 2015}
 
 \begin{frame}
 \frametitle {Improving Clojure Usablilty for Introductory Course}
@@ -44,8 +44,8 @@
 Henry Fellows, Thomas Hagen, Sean Stockholm, Ryan McArthur, and Elena Machkasova \par
 
 {\it 
-HHMI Lunch Presentation\par
-July 1, 2015\par}
+Minnesota Clojure Meetup\par
+July 8, 2015\par}
 }
 \end{frame}
 %frame
@@ -65,30 +65,19 @@ July 1, 2015\par}
 		\begin{itemize}
 			\item Limited teaching language
 			\item Difficult to make complex projects
-			\item Students hitting performance issues
+			\item Students hitting performance issues (!)
 		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{What is Clojure?}
-	\begin{itemize}
-		\item Clojure is a programming language 
-		\item Built on top of the Java programming language
-		\item Designed by Rich Hickey in 2007
-		\item Functional (composition of functions)
-		\item Built for concurrency (simultaneous computation)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Why use Clojure?}
 	\begin{itemize}
-		\item Used in industry (real life)
+		\item Used in industry
 		\item Better on resume
-		\item Many programmers enjoy using Clojure
+		\item Support for concurrency
 		\item Large community and excellent resources
-		\item Large number of libraries (data processing, image recognition, graphical, musical)
+		\item Excellent libraries (data processing, image recognition, graphical, musical)
 	\end{itemize}
 \end{frame}
 
@@ -97,6 +86,7 @@ July 1, 2015\par}
 	\begin{itemize}
 		\item Confusing error messages
 		\item Missing graphics libraries for students
+		\item Large number of misleading core functions
 	\end{itemize}
 \end{frame}
 
@@ -114,7 +104,9 @@ July 1, 2015\par}
 \begin{frame}[fragile]
 \frametitle{Example Native Error}
 		\begin{verbatim}
-		Exception in thread "main" clojure.lang.ArityException: Wrong number of args (3) passed to: core/cons, compiling:(/tmp/form-init3025539740275626138.clj:1:72)
+		Exception in thread "main" clojure.lang.ArityException:
+		Wrong number of args (3) passed to: core/cons, compiling:
+		(/tmp/form-init3025539740275626138.clj:1:72)
 	at clojure.lang.Compiler.load(Compiler.java:7142)
 	at clojure.lang.Compiler.loadFile(Compiler.java:7086)
 	at clojure.main$load_script.invoke(main.clj:274)
@@ -127,17 +119,6 @@ July 1, 2015\par}
 	at clojure.lang.AFn.applyToHelper(AFn.java:156)
 	at clojure.lang.Var.applyTo(Var.java:700)
 	at clojure.main.main(main.java:37)
-Caused by: clojure.lang.ArityException: Wrong number of args (3) passed to: core/cons
-	at clojure.lang.AFn.throwArity(AFn.java:429)
-	at clojure.lang.AFn.invoke(AFn.java:40)
-	at demo.core$_main.doInvoke(core.clj:6)
-	at clojure.lang.RestFn.invoke(RestFn.java:397)
-	at clojure.lang.Var.invoke(Var.java:375)
-	at user$eval5.invoke(form-init3025539740275626138.clj:1)
-	at clojure.lang.Compiler.eval(Compiler.java:6703)
-	at clojure.lang.Compiler.eval(Compiler.java:6693)
-	at clojure.lang.Compiler.load(Compiler.java:7130)
-	... 11 more
 		\end{verbatim}	
 \end{frame}
 
@@ -179,11 +160,59 @@ Found in file core.clj on line 108 in function -main.
 	\end{verbatim}	
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Compilation messages}
+	We can handle compiler errors
+	\begin{itemize}
+	\item Compiler errors are often nested
+	\item Many compiler errors in Clojure 1.7.0 were runtime in earlier versions
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Current message}
+	\begin{verbatim}
+	Exception in thread "main" java.lang.IllegalArgumentException:
+	Parameter declaration "5" should be a vector, compiling:
+	(core.clj:104:5)
+	at clojure.lang.Compiler.macroexpand1(Compiler.java:6644)
+	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6719)
+	at clojure.lang.Compiler.analyze(Compiler.java:6524)
+	at clojure.lang.Compiler.analyze(Compiler.java:6485)
+	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5861)
+	at clojure.lang.Compiler$TryExpr$Parser.parse(Compiler.java:2261)
+	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6733)
+	at clojure.lang.Compiler.analyze(Compiler.java:6524)
+	at clojure.lang.Compiler.analyze(Compiler.java:6485)
+	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5861)
+	at clojure.lang.Compiler$FnMethod.parse(Compiler.java:5296)
+	at clojure.lang.Compiler$FnExpr.parse(Compiler.java:3925)
+	\end{verbatim}	
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Current message}
+		\begin{verbatim}
+Error: Parameters for defn must be a vector, but 5 was found instead.
+Found in file core.clj on line 107 in function -main.
+	clojure.core/assert-valid-fdecl (core.clj line 7180)
+	clojure.core/map (core.clj line 2622)
+	clojure.core/seq (core.clj line 135)
+	clojure.core/filter (core.clj line 2677)
+	clojure.core/seq (core.clj line 135)
+	clojure.core/assert-valid-fdecl (core.clj line 7184)
+	clojure.core/sigs (core.clj line 225)
+	clojure.core/defn (core.clj line 303)
+	intro.core/-main (core.clj line 107)
+		\end{verbatim}	
+\end{frame}
+
 \begin{frame}
 	\frametitle{Recent Improvements}
 	\begin{itemize}
-		\item Fixed issues with arity (the number of arguments in a function)
-		\item Made errors for infinite sequences useful
+		\item Fixed issues with arity 
+		\item Made errors for lazy sequences useful
+		\item \hfcomment{Expand?}
 		\item Working on fixing line number reporting
 		\item Fixed a large number of smaller issues
 	\end{itemize}
