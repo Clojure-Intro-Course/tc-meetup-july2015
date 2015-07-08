@@ -86,7 +86,7 @@ July 8, 2015\par}
 	\begin{itemize}
 		\item Confusing error messages
 		\item Lack of beginner-friendly graphics libraries in functional style
-		\item Some misleading or confusing core functions ({\tt conj, some}, string functions).   
+		\item Some misleading or confusing core functions ({\tt conj, some, for}, string functions)  
 	\end{itemize}
 \end{frame}
 
@@ -108,8 +108,9 @@ July 8, 2015\par}
 		\item Beginner mistakes can lead to very complex errors
 		\item Beginners don't read error messages
 		\item Line number reporting needs to be accurate
+		\item Very little (if any) systematic usability study of error messages		
 		\item Good error messages should lead to a correct fix (study of Racket error messages)
-		\item Very little (if any) systematic usability study of error messages
+		
 	\end{itemize}
 \end{frame}
 
@@ -130,18 +131,18 @@ July 8, 2015\par}
 		Exception in thread "main" clojure.lang.ArityException:
 		Wrong number of args (3) passed to: core/cons, compiling:
 		(/tmp/form-init3025539740275626138.clj:1:72)
-	at clojure.lang.Compiler.load(Compiler.java:7142)
-	at clojure.lang.Compiler.loadFile(Compiler.java:7086)
-	at clojure.main$load_script.invoke(main.clj:274)
-	at clojure.main$init_opt.invoke(main.clj:279)
-	at clojure.main$initialize.invoke(main.clj:307)
-	at clojure.main$null_opt.invoke(main.clj:342)
-	at clojure.main$main.doInvoke(main.clj:420)
-	at clojure.lang.RestFn.invoke(RestFn.java:421)
-	at clojure.lang.Var.invoke(Var.java:383)
-	at clojure.lang.AFn.applyToHelper(AFn.java:156)
-	at clojure.lang.Var.applyTo(Var.java:700)
-	at clojure.main.main(main.java:37)
+		at clojure.lang.Compiler.load(Compiler.java:7142)
+		at clojure.lang.Compiler.loadFile(Compiler.java:7086)
+		at clojure.main$load_script.invoke(main.clj:274)
+		at clojure.main$init_opt.invoke(main.clj:279)
+		at clojure.main$initialize.invoke(main.clj:307)
+		at clojure.main$null_opt.invoke(main.clj:342)
+		at clojure.main$main.doInvoke(main.clj:420)
+		at clojure.lang.RestFn.invoke(RestFn.java:421)
+		at clojure.lang.Var.invoke(Var.java:383)
+		at clojure.lang.AFn.applyToHelper(AFn.java:156)
+		at clojure.lang.Var.applyTo(Var.java:700)
+		at clojure.main.main(main.java:37)
 		\end{verbatim}	
 \end{frame}
 
@@ -153,7 +154,7 @@ July 8, 2015\par}
 		\item We are not changing language definition
 		\item A combination of two approaches: 
 		\begin{itemize}
-		\item Approach 1: overwrite common functions ({\tt map, filter, +} to add pre-conditions for precise parameter reporting
+		\item Approach 1: overwrite common functions ({\tt map, filter, +}) to add pre-conditions for precise parameter reporting
 		\item Approach 2: catch exceptions, match and replace the error message	
 		\end{itemize}
 		\item Filter the stack trace
@@ -165,78 +166,60 @@ July 8, 2015\par}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{First iteration}
+\frametitle{Iterations of Error Message Phrasing}
+	{\small
 		\begin{verbatim}
-Error: Wrong number of arguments (3) passed to a function cons.
-Found in file core.clj on line 108 in function -main.
-	intro.core/-main (core.clj line 108)
+		Exception in thread "main" clojure.lang.ArityException:
+		Wrong number of args (3) passed to: core/cons, compiling:
+		(/tmp/form-init3025539740275626138.clj:1:72)
+		
+		Error: Wrong number of arguments (3) passed to a function cons.
+		Found in file core.clj on line 108 in function -main.
+		intro.core/-main (core.clj line 108)
+	
+		Error: You cannot pass three arguments to a function cons, need 
+		two. 
+		Found in file core.clj on line 108 in function -main.
+		intro.core/-main (core.clj line 108)
 	\end{verbatim}	
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Current message}
-		\begin{verbatim}
-Error: You cannot pass three arguments to a function cons, need two.
-Found in file core.clj on line 108 in function -main.
-	intro.core/-main (core.clj line 108)
-	\end{verbatim}	
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Compilation messages}
-	We can handle compiler errors
-	\begin{itemize}
-	\item Compiler errors are often nested
-	\item Many compiler errors in Clojure 1.7.0 were runtime in earlier versions
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Current message}
-	\begin{verbatim}
-	Exception in thread "main" java.lang.IllegalArgumentException:
-	Parameter declaration "5" should be a vector, compiling:
-	(core.clj:104:5)
-	at clojure.lang.Compiler.macroexpand1(Compiler.java:6644)
-	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6719)
-	at clojure.lang.Compiler.analyze(Compiler.java:6524)
-	at clojure.lang.Compiler.analyze(Compiler.java:6485)
-	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5861)
-	at clojure.lang.Compiler$TryExpr$Parser.parse(Compiler.java:2261)
-	at clojure.lang.Compiler.analyzeSeq(Compiler.java:6733)
-	at clojure.lang.Compiler.analyze(Compiler.java:6524)
-	at clojure.lang.Compiler.analyze(Compiler.java:6485)
-	at clojure.lang.Compiler$BodyExpr$Parser.parse(Compiler.java:5861)
-	at clojure.lang.Compiler$FnMethod.parse(Compiler.java:5296)
-	at clojure.lang.Compiler$FnExpr.parse(Compiler.java:3925)
-	\end{verbatim}	
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Current message}
-		\begin{verbatim}
-Error: Parameters for defn must be a vector, but 5 was found instead.
-Found in file core.clj on line 107 in function -main.
-	clojure.core/assert-valid-fdecl (core.clj line 7180)
-	clojure.core/map (core.clj line 2622)
-	clojure.core/seq (core.clj line 135)
-	clojure.core/filter (core.clj line 2677)
-	clojure.core/seq (core.clj line 135)
-	clojure.core/assert-valid-fdecl (core.clj line 7184)
-	clojure.core/sigs (core.clj line 225)
-	clojure.core/defn (core.clj line 303)
-	intro.core/-main (core.clj line 107)
-		\end{verbatim}	
+	}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Recent Improvements}
+	\frametitle{Unified Phrasing}
 	\begin{itemize}
-		\item Fixed issues with arity 
-		\item Made errors for lazy sequences useful
-		\item \hfcomment{Expand?}
-		\item Working on fixing line number reporting
-		\item Fixed a large number of smaller issues
+	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Printing Arguments}
+	\begin{itemize}
+	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Current Work}
+	\begin{itemize}
+	\item Syntax errors vs. runtime errors
+	\item Reporting line numbers	
+		\begin{itemize}
+		\item Sometimes a part of the message
+		\item Sometimes a part of the stacktrace
+		\item Sometimes neither
+		\item Different line number reporting for different methods of evaluation
+		\end{itemize}
+	\item Common sources of errors (hints)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Future Work}
+	\begin{itemize}
+	\item Integrating with an IDE and REPL
+	\item User feedback loop
+	\item Usability studies
 	\end{itemize}
 \end{frame}
 
