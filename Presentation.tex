@@ -494,57 +494,6 @@ Found in file core.clj on line 107 in function -main.
 	\end{itemize}
 \end{frame}
 
-
-
-\begin{frame}[fragile]
-	\frametitle{Overlaying and complex shapes}
-	\begin{itemize}
-	\item You can put shapes on top of each other 
-	\begin{columns}[t]
-		\begin{column}{.45\textwidth}
-		\begin{verbatim}
-		(overlay window roof)
-		\end{verbatim}
-		\end{column}
-		\begin{column}{.3\textwidth}
-		\begin{figure}[h]
-			\includegraphics[width=1.22cm]{PresentationImages/roof.png}
-			\end{figure}		
-		\end{column}
-		\end{columns} 
-		\begin{columns}[t]
-		\begin{column}{.45\textwidth}
-		\begin{verbatim}
-		(overlay-align :bottom :center 
-		     door 
-		     red-rect)
-		\end{verbatim}
-		\end{column}
-		\begin{column}{.3\textwidth}
-		\begin{figure}[h]
-			\includegraphics[width=1.2cm]{PresentationImages/body.png}
-			\end{figure}		
-		\end{column}
-		\end{columns} 
-		\begin{columns}[t]
-		\begin{column}{.45\textwidth}
-		\begin{verbatim}
-		(scale-shape 
-		  (above (overlay top bottom)) 
-		1.4 1.4)
-
-		\end{verbatim}
-		\end{column}
-		\begin{column}{.3\textwidth}
-		\begin{figure}[h]
-			\includegraphics[width=2cm]{PresentationImages/house.png}
-			\end{figure}		
-		\end{column}
-		\end{columns}
-	\end{itemize}
-	
-\end{frame}
-
 \begin{frame}[fragile]
 	\frametitle{Other complex functions}
 	\begin{itemize}
@@ -599,28 +548,83 @@ Found in file core.clj on line 107 in function -main.
 \end{frame}
 
 \begin{frame}[fragile]
+	\frametitle{Overlaying and complex shapes}
+	\begin{itemize}
+	\item You can put shapes on top of each other 
+	\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(overlay window roof)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.22cm]{PresentationImages/roof.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(overlay-align :bottom :center 
+		     door 
+		     red-rect)
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=1.2cm]{PresentationImages/body.png}
+			\end{figure}		
+		\end{column}
+		\end{columns} 
+		\begin{columns}[t]
+		\begin{column}{.45\textwidth}
+		\begin{verbatim}
+		(scale-shape 
+		  (above top bottom) 
+		1.4 1.4)
+
+		\end{verbatim}
+		\end{column}
+		\begin{column}{.3\textwidth}
+		\begin{figure}[h]
+			\includegraphics[width=2cm]{PresentationImages/house.png}
+			\end{figure}		
+		\end{column}
+		\end{columns}
+	\end{itemize}
+	
+\end{frame}
+
+
+
+\begin{frame}[fragile]
 	\frametitle{The draw-shape function}
 	\begin{itemize}
-	\item Draw-shape (or ds, either work) is the function that handles taking in these shape objects and drawing the elements of them appropriately.
+	\item Draw-shape (or ds, either work) is the function that takes in these shapes objects and draws them at a given x y position.
 		\begin{verbatim}
 (draw-shape 
    (create-rect 200 200 :red) 
    400 400)
 		\end{verbatim}
-		
+		\begin{verbatim}
+(ds (above circle
+           triangle)
+     100 100)
+		\end{verbatim}
 		\begin{verbatim}
 (draw-shape 
-   (beside box1
-           box2
-           circle
-           triangle))
+ (beside box1
+         box2)
+  400 200)
+
 		\end{verbatim}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile]
-	\frametitle{The draw-shape function}
+	\frametitle{Inside a rectangle}
 		\begin{verbatim}
 {:w w
  :h h
@@ -640,8 +644,6 @@ Found in file core.clj on line 107 in function -main.
 \end{frame}
 
 
-
-%Build house slides, round window
 
 \begin{frame}
 	\frametitle{Our direction}
