@@ -96,13 +96,36 @@ July 8, 2015\par}
 	\frametitle{Error Messages}
 	\begin{itemize}
 		\item Computers are literal
-		\item Primary means of communication
-		\item Inherently difficult to create
+		\item Error messages are the only way to communicate when something goes wrong
+		\item By the time an error is detected, a lot of the context is lost
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Error Messages for Beginners}
+	\begin{itemize}
+		\item Use terminology that beginners haven't been introduced to
+		\item Beginner mistakes can lead to very complex errors
+		\item Beginners don't read error messages
+		\item Line number reporting needs to be accurate
+		\item Good error messages should lead to a correct fix (study of Racket error messages)
+		\item Very little (if any) systematic usability study of error messages
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Clojure Error Messages}
+	\begin{itemize}
+		\item Java exceptions
+		\item Use not only Java types, but Java terminology: "cannot be cast", "null pointer"
+		\item Very verbose
+		\item Stack traces are long
+		\item Compiler messages come with a separate cause
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Example Native Error}
+\frametitle{Example Clojure Error}
 		\begin{verbatim}
 		Exception in thread "main" clojure.lang.ArityException:
 		Wrong number of args (3) passed to: core/cons, compiling:
@@ -122,23 +145,22 @@ July 8, 2015\par}
 		\end{verbatim}	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Current Error Messages}
-	\begin{itemize}
-		\item Incredibly awful
-		\item Use strange terminology
-		\item Meaningless to most people
-		\item Extremely bulky
-	\end{itemize}
-\end{frame}
+
 
 \begin{frame}
-	\frametitle{New Error Messages}
+	\frametitle{Our Error Messages}
 	\begin{itemize}
-		\item Interpret old errors
-		\item Replace with new message
-		\item Terminology that is friendly to novices
+		\item We are not changing language definition
+		\item A combination of two approaches: 
+		\begin{itemize}
+		\item Approach 1: overwrite common functions ({\tt map, filter, +} to add pre-conditions for precise parameter reporting
+		\item Approach 2: catch exceptions, match and replace the error message	
+		\end{itemize}
+		\item Filter the stack trace
+		\item Avoid unfamiliar terminology
 		\item Consistency within error messages
+		\item Readable and short
+		\item Future direction: adding hints for common sources of errors
 	\end{itemize}
 \end{frame}
 
