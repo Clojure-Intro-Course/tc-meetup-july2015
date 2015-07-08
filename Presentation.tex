@@ -171,7 +171,7 @@ July 8, 2015\par}
 		\begin{verbatim}
 		Exception in thread "main" clojure.lang.ArityException:
 		Wrong number of args (3) passed to: core/cons, compiling:
-		(/tmp/form-init3025539740275626138.clj:1:72)
+		(intro.core/-main.clj:108:1)
 		
 		Error: Wrong number of arguments (3) passed to a function cons.
 		Found in file core.clj on line 108 in function -main.
@@ -187,11 +187,16 @@ July 8, 2015\par}
 
 \begin{frame}
 	\frametitle{Unified Phrasing}
+	 Original: 
 	\begin{itemize}
-	\item Original: {\tt Let requires an even number of forms}
-	\item New: {\tt Parameters for let must come in pairs, but one of them does not have a match.}
-	\item Original: {\tt Vector arg to map conj must be a pair}
-	\item New: {\tt Each inner vector must be a pair: a key followed by a value.}
+		\item {\tt let requires an even number of forms}
+		\item  {\tt Vector arg to map conj must be a pair}
+	\end{itemize}
+
+	New: 
+	\begin{itemize}
+		\item {\tt Parameters for let must come in pairs, but one of them does not have a match.}
+		\item  {\tt Each inner vector must be a pair: a key followed by a value.}
 	\end{itemize}
 \end{frame}
 
@@ -247,7 +252,7 @@ July 8, 2015\par}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Future Work}
+	\frametitle{Future Work on Error Messages}
 	\begin{itemize}
 	\item Integrating with an IDE and REPL
 	\item User feedback loop
