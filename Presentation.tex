@@ -188,14 +188,46 @@ July 8, 2015\par}
 \begin{frame}
 	\frametitle{Unified Phrasing}
 	\begin{itemize}
-	
+	\item Original: {\tt Let requires an even number of forms}
+	\item New: {\tt Parameters for let must come in pairs, but one of them does not have a match.}
+	\item Original: {\tt Vector arg to map conj must be a pair}
+	\item New: {\tt Each inner vector must be a pair: a key followed by a value.}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Printing Arguments}
 	\begin{itemize}
+	\item Asserts for functions: 
 	
+	{\tt Error: in function map the first argument 2 must be a function but is a number}.
+	
+	\item How about this?
+	
+	{\tt Error: in function map the second argument clojure.core$\$\_$STAR$\_$ must be a sequence, but is a function}
+	
+	Function name processing: {\tt the second argument *}...
+	%\item But what about {\tt (map (range) inc)}? Lazy sequences are values: {\tt Error: In function +, the second argument clojure.lang.LazySeq@22 must be a number but is a sequence.} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Printing Arguments (cont.)}
+	\begin{itemize}
+	\item But what about  {\tt (map (range) inc)}? 
+	
+	{\tt In function +, the second argument clojure.lang.LazySeq@22 must be a number but is a sequence.} 
+	
+	%Partially evaluate:
+	
+	{\tt In function +, the second argument (0 1 2 3 4 5 6 7 8 9...) must be a number but is a sequence.} 
+	
+	\item Challenges (work in progress):
+	\begin{itemize}
+	\item {\tt (repeat (range))} - infinite sequence of infinite sequences
+	\item How many levels do we evaluate? 
+	\item Need to evaluate arguments recursively: {\tt (clojure.core$\$\_$STAR$\_$)} should be {\tt (*)}. 
+	\end{itemize}
 	\end{itemize}
 \end{frame}
 
