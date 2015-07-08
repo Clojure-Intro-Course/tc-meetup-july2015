@@ -556,6 +556,47 @@ July 8, 2015\par}
 	
 \end{frame}
 
+\begin{frame}[fragile]
+	\frametitle{The draw-shape function}
+	\begin{itemize}
+	\item Draw-shape (or ds, either work) is the function that handles taking in these shape objects and drawing the elements of them appropriately.
+		\begin{verbatim}
+(draw-shape 
+   (create-rect 200 200 :red) 
+   400 400)
+		\end{verbatim}
+		
+		\begin{verbatim}
+(draw-shape 
+   (beside box1
+           box2
+           circle
+           triangle))
+		\end{verbatim}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{The draw-shape function}
+		\begin{verbatim}
+{:w w
+ :h h
+ :tw w
+ :th h
+ :dx 0
+ :dy 0
+ :angle 0
+ :ds (fn [x y pict wid hei cs angle]
+       (*large cond to check fill/stroke here*)
+       (with-translation [x y]
+         (with-rotation 
+           [(/ (* PI angle) 180)] 
+           (f-rect 0 0 wid hei)))
+       (no-fill))}
+		\end{verbatim}		
+\end{frame}
+
 
 
 %Build house slides, round window
